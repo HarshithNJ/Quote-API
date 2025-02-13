@@ -1,6 +1,7 @@
 package org.restapi.quote_manager.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.restapi.quote_manager.dto.quote;
@@ -31,5 +32,23 @@ public class quoteService {
 
             return new ResponseEntity<Object>(map, HttpStatus.CREATED);
         }
+    }
+
+    public ResponseEntity<Object> addMultipleQuotes(List<quote> quotes) {
+        for(quote quote : quotes){
+            if(repository.existsByText(quote.getText())){
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("error", "Quote already exists");
+    
+                return new ResponseEntity<Object>(map, HttpStatus.NOT_ACCEPTABLE);
+            }
+        }
+        repository.saveAll(quotes);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("success", "Quotes added successfully");
+        map.put("Quotes", quotes);
+
+        return new ResponseEntity<Object>(map, HttpStatus.CREATED);
     }
 }

@@ -1,5 +1,7 @@
 package org.restapi.quote_manager.controller;
 
+import java.util.List;
+
 import org.restapi.quote_manager.dto.quote;
 import org.restapi.quote_manager.service.quoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +21,11 @@ public class quoteController {
     @PostMapping("/quotes")
     public ResponseEntity<Object> addQuote(@RequestBody quote quote){
         return service.addQuote(quote);
+    }
+
+    // to Add multiple quotes
+    @PostMapping("/quotes/multiple")
+    public ResponseEntity<Object> addMultipleQuotes(@RequestBody List<quote> quotes){
+        return service.addMultipleQuotes(quotes);
     }
 }
