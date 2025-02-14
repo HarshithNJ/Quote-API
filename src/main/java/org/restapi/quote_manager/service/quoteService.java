@@ -79,4 +79,21 @@ public class quoteService {
             return new ResponseEntity<Object>(map, HttpStatus.FOUND);
         }
     }
+
+    public ResponseEntity<Object> getQuoteByAuthor(String author) {
+        List<quote> quotes = repository.findByAuthor(author);
+
+        if(quotes.isEmpty()){
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "No quotes found");
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "Quotes fetched successfully");
+            map.put("Quotes", quotes);
+
+            return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+        }
+    }
 }
