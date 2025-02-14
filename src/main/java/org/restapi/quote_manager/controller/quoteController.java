@@ -47,4 +47,10 @@ public class quoteController {
     public ResponseEntity<Object> getQuoteByAuthor(@PathVariable String author){
         return service.getQuoteByAuthor(author);
     }
+
+    // to get quotes by category
+    @GetMapping("/quotes/category/{category}")
+    public ResponseEntity<Object> getQuoteByCategory(@PathVariable String category){
+        return service.getQuoteByCategory(category);
+    }
 }
