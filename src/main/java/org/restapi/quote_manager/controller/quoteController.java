@@ -6,6 +6,7 @@ import org.restapi.quote_manager.dto.quote;
 import org.restapi.quote_manager.service.quoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,5 +53,18 @@ public class quoteController {
     @GetMapping("/quotes/category/{category}")
     public ResponseEntity<Object> getQuoteByCategory(@PathVariable String category){
         return service.getQuoteByCategory(category);
+    }
+
+
+
+
+
+
+
+
+    // To Delete a Quote
+    @DeleteMapping("/quotes/{id}")
+    public ResponseEntity<Object> deleteQuote(@PathVariable int id){
+        return service.deleteQuote(id);
     }
 }

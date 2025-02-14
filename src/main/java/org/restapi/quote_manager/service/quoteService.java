@@ -3,6 +3,7 @@ package org.restapi.quote_manager.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.restapi.quote_manager.dto.quote;
 import org.restapi.quote_manager.repository.quoteRepository;
@@ -111,6 +112,36 @@ public class quoteService {
             map.put("Quotes", quotes);
 
             return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public ResponseEntity<Object> deleteQuote(int id) {
+        Optional<quote> quote = repository.findById(id);
+
+        if(quote.isPresent()){
+            repository.deleteById(id);
+
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "Quote deleted successfully");
+
+            return new ResponseEntity<Object>(map, HttpStatus.OK);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "Quote not found");
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
         }
     }
 }
