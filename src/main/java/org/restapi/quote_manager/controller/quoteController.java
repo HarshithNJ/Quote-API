@@ -6,6 +6,8 @@ import org.restapi.quote_manager.dto.quote;
 import org.restapi.quote_manager.service.quoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,5 +29,16 @@ public class quoteController {
     @PostMapping("/quotes/multiple")
     public ResponseEntity<Object> addMultipleQuotes(@RequestBody List<quote> quotes){
         return service.addMultipleQuotes(quotes);
+    }
+
+
+
+
+
+
+    // to Get all quotes
+    @GetMapping("/quotes")
+    public ResponseEntity<Object> getAllQuotes(){
+        return service.getAllQuotes();
     }
 }
