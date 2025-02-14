@@ -144,4 +144,46 @@ public class quoteService {
             return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public ResponseEntity<Object> updateQuote(int id, quote quote) {
+        Optional<quote> quote1 = repository.findById(id);
+
+        if(quote1.isPresent()){
+            quote quote2 = quote1.get();
+
+            if(quote.getAuthor() != null)
+                quote2.setAuthor(quote.getAuthor());
+            
+            if(quote.getText() != null)
+                quote2.setText(quote.getText());
+
+            if(quote.getCategory() != null)
+                quote2.setCategory(quote.getCategory());
+
+            repository.save(quote2);
+
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "Quote updated successfully");
+            map.put("Quote", quote2);
+
+            return new ResponseEntity<Object>(map, HttpStatus.OK);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "Quote not found with id: " + id);
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }
+    }
 }

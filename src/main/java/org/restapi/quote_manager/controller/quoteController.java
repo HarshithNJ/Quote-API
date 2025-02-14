@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -66,5 +67,16 @@ public class quoteController {
     @DeleteMapping("/quotes/{id}")
     public ResponseEntity<Object> deleteQuote(@PathVariable int id){
         return service.deleteQuote(id);
+    }
+
+
+
+
+
+
+    // To Update a Quote
+    @PatchMapping("/quotes/{id}")
+    public ResponseEntity<Object> updateQuote(@PathVariable int id, @RequestBody quote quote){
+        return service.updateQuote(id, quote);
     }
 }
